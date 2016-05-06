@@ -1,0 +1,18 @@
+App\TreeBundle\Entity\Tree:
+    type: entity
+    table: tree
+    repositoryClass: App\TreeBundle\Entity\TreeRepository
+
+    oneToMany:
+        nodes:
+            targetEntity: App\TreeBundle\Entity\Node
+            mappedBy: tree
+
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    lifecycleCallbacks: {  }
+

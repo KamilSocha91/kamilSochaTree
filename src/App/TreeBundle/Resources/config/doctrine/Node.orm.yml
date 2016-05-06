@@ -1,0 +1,37 @@
+App\TreeBundle\Entity\Node:
+    type: entity
+    table: node
+    repositoryClass: App\TreeBundle\Entity\NodeRepository
+
+    manyToOne:
+        tree:
+            targetEntity: App\TreeBundle\Entity\Tree
+            inversedBy: nodes
+            joinColumn:
+                name: tree_id
+                referencedColumnName: id
+
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        content:
+            type: string
+            length: 255
+            nullable: true
+        name:
+            type: string
+            length: 255
+            nullable: true
+        parentId:
+            type: integer
+            nullable: true
+        nodeId:
+            type: integer
+            nullable: true
+
+    lifecycleCallbacks: {  }
+

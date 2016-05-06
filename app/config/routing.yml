@@ -1,0 +1,6 @@
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+app_tree:
+    resource: "@AppTreeBundle/Resources/config/routing.yml"
+    prefix:   /

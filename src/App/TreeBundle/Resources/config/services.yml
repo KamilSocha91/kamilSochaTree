@@ -1,0 +1,23 @@
+parameters:
+    #Repositories classes
+    tree.repository.class: 'App\TreeBundle\Entity\TreeRepository'
+    tree.repository.entity: 'App\TreeBundle\Entity\Tree'
+    #Services classes
+    tree.service.class: 'App\TreeBundle\Services\TreeService'
+    #Forms classes
+    tree.form.class: 'App\TreeBundle\Form\Type\TreeType'
+services:
+    tree.repository:
+        class: %tree.repository.class%
+        public: false
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments: [%tree.repository.entity%]
+    tree.service:
+        class: %tree.service.class%
+        arguments: ['@tree.repository']
+        scope: request
+    tree.form:
+        class: %tree.form.class%
+        tags:
+            - { name: form.type, alias: app_erp_tree }

@@ -1,0 +1,16 @@
+tree_index:
+    path: /
+    defaults:
+        _controller: AppTreeBundle:Tree:index
+
+tree_get:
+    pattern: /getTreeData/{treeId}
+    defaults: { _controller: AppTreeBundle:Tree:get }
+    options:
+        expose: true
+
+tree_post:
+    pattern: /postTreeData
+    defaults: { _controller: AppTreeBundle:Tree:post }
+    options:
+        expose: true

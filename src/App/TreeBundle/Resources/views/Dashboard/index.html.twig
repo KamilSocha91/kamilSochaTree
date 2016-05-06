@@ -1,0 +1,63 @@
+{% extends '@AppTree/Layouts/basic.html.twig' %}
+
+{% block title %}{# {{ 'interface.title'|trans }} #}Tree Builder{% endblock %}
+
+{% block content %}
+	{# <div class="loader">Loading...</div> #}
+	<div ng-app="treeApp">
+		<script type="text/ng-template"  id="tree_item">
+			<div class="btn" >
+			    <label ng-bind="data.name"></label>
+			    <input ng-value="data.content" ng-model="data.content" ng-change="change(data.content, data.id)"></input>
+			    <button class="btn__confirm" ng-click="add(data)">Add node</button>
+			    <button class="btn__delete" ng-click="delete(data)" ng-show="data.nodes.length > 0">Delete nodes</button>
+		    </div>
+		    <ul  ui-sortable="sortableOptions" ng-model="data.nodes">
+		        <li ng-repeat="data in data.nodes" ng-include="'tree_item'"></li>
+		    </ul>
+		</script>
+
+	    <section ng-controller="treeCtrl" class="top">
+	    	<div class="top__left">
+				<div  class="top__left-top">
+					<header><h1>Tree</h1></header>
+
+					<div class="btn">
+						<input type="file" accept=".json" on-read-file="getFile($fileContent)"/>
+			    		<button class="btn__save" ng-click="save(data)">Save Tree</button>
+			    	</div>
+
+					<ul>
+					    <li ng-repeat="data in tree" ng-include="'tree_item'" style="cursor:default;">
+					    	<element ng-bind="data"></element>
+					    </li>
+					</ul>
+				</div>
+
+				<div  class="top__left-bottom">
+					<header><h1>Database</h1></header>
+
+					<ul ng-hide="showList">
+						{% for data in list %}
+							<li> Tree id. {{data.id}} <button class="btn__load" ng-click="load({{data.id}})">Load</button></li>
+						{% endfor %}
+					</ul>
+
+					<ul>
+						<li ng-repeat="data in list"> Tree id. <element ng-bind="data.id"></element>
+							<button class="btn__load" ng-click="load(data.id)">Load</button> 
+						</li>
+					</ul>
+					
+				</div>
+			</div>
+			<div class="top__right">
+				<header><h1>JSON</h1></header>
+					<pre ng-bind="tree|json"></pre>
+			</div>
+	    </section>
+
+		<div style="clear: both;"></div>
+
+	</div>
+{% endblock %}
