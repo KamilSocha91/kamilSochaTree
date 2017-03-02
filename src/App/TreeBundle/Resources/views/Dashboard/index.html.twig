@@ -23,12 +23,13 @@
 					<header><h1>Tree</h1></header>
 
 					<div class="btn">
-						<input type="file" accept=".json" on-read-file="getFile($fileContent)"/>
+						<input name="jsonFile" type="file" accept=".json" on-read-file="getFile($fileContent)"/>
 			    		<button class="btn__save" ng-click="save(data)">Save Tree</button>
+			    		<button class="btn__load" ng-click="new()">New</button>
 			    	</div>
 
 					<ul>
-					    <li ng-repeat="data in tree" ng-include="'tree_item'" style="cursor:default;">
+					    <li ng-repeat="data in tree" ng-show="tree.error == null" ng-include="'tree_item'" style="cursor:default;">
 					    	<element ng-bind="data"></element>
 					    </li>
 					</ul>
