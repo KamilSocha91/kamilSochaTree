@@ -1,1 +1,4 @@
 vendor/
+bin/
+app/cache
+app/logs
